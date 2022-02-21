@@ -19,3 +19,8 @@ class ArticleSerializer(serializers.Serializer):
         instance.save()
         return instance
 
+
+class ArticleModelSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Article
+        fields = ['id', 'title', 'author', 'date']

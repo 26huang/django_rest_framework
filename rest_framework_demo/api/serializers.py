@@ -3,6 +3,9 @@ from .models import Article
 
 
 class ArticleSerializer(serializers.Serializer):
+    """
+    Functional based api using Serializer only.
+    """
     title = serializers.CharField(max_length=100)
     author = serializers.CharField(max_length=100)
     email = serializers.EmailField(max_length=100)
@@ -21,6 +24,10 @@ class ArticleSerializer(serializers.Serializer):
 
 
 class ArticleModelSerializer(serializers.ModelSerializer):
+    """
+    API using ModelSerializer. This is preferred over regular Serializer due to simplicity.
+    """
     class Meta:
         model = Article
-        fields = ['id', 'title', 'author', 'date']
+        fields = '__all__' # Use this to get all fields.
+        # fields = ['id', 'title', 'author', 'date', 'email',]

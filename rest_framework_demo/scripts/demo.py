@@ -20,3 +20,13 @@ print(serializer.data)
 print(ArticleModelSerializer())
 print(ArticleSerializer())
 
+# use postman to exercise GET, POST, and PUT
+# GET localhost:8000/api/article/
+# GET localhost:8000/api/detail/3
+# POST localhost:8000/api/article/
+# Body > Raw > {
+#     "id": 3,
+#     "title": "Test 3",
+#     "author": "Wei3"
+# }
+

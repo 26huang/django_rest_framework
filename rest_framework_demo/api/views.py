@@ -8,9 +8,33 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.views import APIView
+from rest_framework import generics
+from rest_framework import mixins
 
 
 # Create your views here.
+class GenericAPIView(generics.GenericAPIView, mixins.ListModelMixin, mixins.CreateModelMixin,
+                     mixins.UpdateModelMixin, mixins.RetrieveModelMixin, mixins.DestroyModelMixin):
+    serializer_class = ArticleModelSerializer
+    queryset = Article.objects.all()
+    lookup_field = 'id'
+
+    def get(self, request, id=None):  # uses mixins.ListModelMixin
+        if id:
+            return self.retrieve(request)  # mixins.RetrieveModelMixin
+        else:
+            return self.list(request)
+
+    def post(self, request):  # uses mixins.CreateModelMixin
+        return self.create(request)
+
+    def put(self, request, id=None):
+        return self.update(request, id)
+
+    def delete(self, request, id=None):  # uses mixins.DestroyModelMixin
+        return self.destroy(request, id)
+
+
 class ArticleAPIView(APIView):
     """
     Endpoint to get all articles in the database
